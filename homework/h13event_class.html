@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>document와 Event와 class 연습</title>
+    <!-- 외부스타일 링크 위치 -->
+    <style>/*내부스타일
+    스*/
+    .blue{
+        color:blue;
+        font-size: small;
+        text-decoration: underline;
+    }
+    .red{
+        color:red;
+    }
+
+    </style>
+</head>
+<body>
+    <h1>document와 Event와 class 연습</h1>
+    <div>
+        <h2>버튼을 누르면 아래의 li의 모든 class에 blue를 추가하세요.(class,querySelector 이용해서)
+        <button id="switchBlueBtn" type="button">배열을 모두 파란색으로</button></h2>
+        <ul id="blueUl">
+            <li>01. 버튼 선택자로 버튼 개체 찾기</li>
+            <li>02. #blueUl>li 선택자로 nodeList 찾기</li>
+            <li>03. 버튼에 onclick 재정의하기 (onclick에 정의된 함수를 내가 정의한 함수로 바꾼다.)</li>
+            <li>04. 버튼에 onclick 재정의하면서 li반복문 작성하기</li>
+            <li class="a">05. li반복문에서 li에 class blue 추가하기</li>
+        </ul>
+    </div>
+    <div>
+        <h2></h2>
+    </div>
+    <script>
+        let switchBlueBtn=document.querySelector("#switchBlueBtn");
+        //console.log(switchBlueBtn);
+        let blueUlLis=document.querySelectorAll("#blueUl>li");
+       // console.log(blueUlLis);
+        
+        switchBlueBtn.onclick=function () {
+           blueUlLis.forEach((li)=>{
+            //li.style.color="green";
+            li.classList.toggle("blue");
+           })
+        };
+        
+       // blueUlLis.classList.add("blue");
+        //console.log(li.className);
+
+        
+    </script>
+</body>
+</html>

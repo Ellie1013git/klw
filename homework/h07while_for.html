@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>반복문 실습</title>
+</head>
+<body>
+    <h1>반복문을 연습해 봅시다</h1>
+    <script>
+        let arr=[101,10,22,44,56,210,55.3]
+        //while 반복문을 이용해서 위 배열의 모든 값을 더하세요.
+        let i=0;
+        let sum=null;
+        while(i<arr.length){
+            console.log(arr[i]);
+            sum = sum+arr[i];
+            i++;
+        };
+        console.log(sum);
+
+
+        let i11=arr.length-1;
+        let sum11=0;
+        while(i11>=0){
+        console.log(arr[i11]);
+            sum11 += arr[i11];
+            i11--;
+            
+        };
+        console.log(sum11);
+        
+
+        let arr2=[101,10,"4",22,"33.33",44,56,210,55.3]
+        //for 반복문을 이용해서 위 배열의 모든 값을 더하세요.(반환값은 수로 작성하세요.)
+        let sum2=0;
+        
+        for(let i2=0; i2<arr2.length; i2++){
+            sum2 = sum2+Number(arr2[i2]);
+        };//자바스크립트는 숫자+문자열 => 문자열 + 연산의 우선순의를 높게 잡는다.
+        //11142233.33445621055.3
+        console.log(sum2);
+
+        let arr3=[101,10,"삼",22,"삼십삼",44,56,210,undefined]
+        let sum3=0;
+        //for 문자열을 제외하고 위 배열의 모든 값을 더하세요
+        //typeof "삼" or 101 return ("sting", "number"), isNaN
+        for(let i3=0; i3<arr3.length; i3++){
+            //console.log(arr3[i], typeof arr3[i]);
+            if(typeof arr3[i3] == "number"){
+                sum3+=arr3[i3]}
+        };
+        console.log(sum3);
+
+        let sum33=0;
+        for(let i33=0; i33<arr3.length; i33++){
+            if(isNaN(arr3[i33])){
+                arr3.splice(i33,1);
+                --i33;
+            }
+            else{
+                sum33 = sum33+arr3[i33];}
+        };
+        console.log(sum33);
+
+        let arr4=[101,10,"삼",22,"삼십삼",44,56,210,undefined]
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>

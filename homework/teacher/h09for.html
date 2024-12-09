@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>for 반복문 연습문제</title>
+</head>
+<body>
+    <h1>for 반복문 연습문제</h1>
+    <script>
+        //1. 구구단을 출력하는 함수를 만드세요.
+        //gugudan(2);
+        //2*1=2
+        //2*2=4
+        //...2*9=18
+
+       function gugudan(dan) {
+        let str=`${dan}단 시작\n`;
+        for(let i=1; i<10; i++){
+           // str+=(dan+"X"+i+"="+dan*i)+"\n";
+           str+=`${dan}X${i}=${dan*i}\n`;
+           //${}표현식을 사용할 수 있는 문자열(백틱), ''==""   ``
+        }
+
+        return str; //return 하면 함수종료. 그 밑에 뭘 써도 실행 안됨.
+        
+       }
+
+       let dan2=gugudan(2);
+       console.log(dan2);
+       console.log(gugudan(13));
+       
+       
+
+
+        //2. powArr(2); => [2,4,8,16 ......1024(2의10승까지)] 배열을 반환
+        function powArr(num) {
+            
+            let arr=[];
+            // arr[10]=1024;  //10번째에 값을 넣는다
+            // arr.push(100) //마지막 인덱스 다음에 들어감
+            for(let i=0; i<=10; i++){
+                //arr.push(num**i);
+                arr[i]=Math.pow(num,i);
+            }
+            return arr;
+        }
+        let arrPow3=powArr(3)
+        console.log(arrPow3);
+        console.log(powArr(999)); //9.920279440699441e+23 10의 23승. 지수부. 실수부 특징
+        console.log(powArr(100000000000000000000000000000000)); //Infinity 지수부로 표현할 수 없는 큰 수다.
+        
+
+        function setGrade(score) {// function은 단순할수록 재사용하기 좋다. 객체지향적이다.
+            let key=Math.floor(score/10); //6.6 =>6
+            //95/10=9.5->반올림->10 -9 =1
+            //94/10 9.4 반올림-> 9-9=0
+            //반올림(round-반올림, ceil-올림, floor-내림) 점수와 버림 점수를 빼면 무조건 1이 나온다.
+            let plus="";
+            if((Math.round(score/10)-key) === 1){
+                plus="+"
+            }
+            let grede;
+            if(key===10){
+                grade="A+";
+            }else if(key<6){
+                grade="F"
+            }else{if(key===9){
+                    grade="A";
+                }else if(key===8){
+                    grade="B";
+                }else if(key===7){
+                    grade="C";
+                }else if(key===6){
+                    grade="D";
+                }
+                grade+=plus;
+            }
+            return grade;
+        }
+
+
+        //3. let scores=[66,77,90,80,50,88]
+        //   let grades=[]
+        // 위의 socre를 성적내서 grades로 반환하는 함수를 만드세요
+        //=>["D","C","A","B","F","B"]
+        function setGrades(scores) {
+            let grades=[];
+            //let gradeObj={6:"D",7:"C",8:"B",9:"A",10:"A"}
+            //object key를 이용해서 if문 대신 사용하기 (js개발자들이 애용하는 방법)
+            //  return gradeObj[key]
+            for(let i=0; i<scores.length; i++){
+                grades.push(setGrade(scores[i]));
+                
+                
+            }
+            // return undefined; == reterun; == void함수(특정 위치에서 종료하고 싶을 때 사용)
+            return grades;
+        }
+        let scores=[100,66,77,90,80,50,88]
+        console.log(setGrades(scores));
+        
+    
+      
+
+    </script>
+</body>
+</html>

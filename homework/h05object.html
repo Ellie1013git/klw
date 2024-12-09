@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>object 실습</title>
+</head>
+<body>
+    <h1>object 실습</h1>
+    <p>
+        문제0. 변수 objB가 참조하는 객체를 만드세요. 필드 a,b,c,100이 있고 모두 수 데이터입니다
+        문제1. objB 필드 c의 값을 60으로 바꾸세요.
+        문제2. objB 필드 100의 값을 1 증가 시키세요.
+        문제3. 리터럴 표기법으로 name, age, job 필드가 있는 객체를 생성하세요.(data는 자유)
+        문제4. Person type을 만들어서 name, age, job 필드가 있는 객체를 생성하세요.
+    </p>
+
+    <script>
+        
+        //문제0
+       /*  class objA {
+            constructor(a,b,c,[100]){
+                this.a=10
+                this.b=20
+                this.c=30
+                this[100]=40
+            }
+        }
+        console.log(objA);
+
+        //문제1
+
+
+        //문제1
+        class objB extends objA {
+            constructor(){
+            super([100], a, b,);
+            this.c=31
+            }
+
+        }
+        let B=new objB(10,10,10,10)
+        console.log(B);
+ */
+        //문제0. 변수 objB가 참조하는 객체를 만드세요. 필드 a,b,c,100이 있고 모두 수 데이터입니다
+        let objB={a:10, b:20, c:30, 100:40}
+        console.log(objB);
+
+        //문제1
+        objB.c=60;
+            //또는
+        objB["c"]=60;
+
+        //문제2
+        objB[100]+=1;
+        ++objB[100];
+
+        console.log(objB);
+
+        //문제3 리터럴 표기법으로 name, age, job 필드가 있는 객체를 생성하세요.(data는 자유)
+        class objC {
+            constructor(){
+                this.name="아아"
+                this.age=20
+                this.job="오오"
+            }
+        }
+        console.log(new objC);
+
+        //문제4 Person type을 만들어서 name, age, job 필드가 있는 객체를 생성하세요.
+        /*let person={name:"너너", age:23, job:"누누"}*/ 
+        // 처럼 하면 name=>naming을 바꿔달라 하면 하나하나 바꿔줘야함.(야근)
+        // 타입을 만들고 객체를 생성 =>(정시퇴근)
+        class Person {
+            constructor(name, age, job){
+                this.name=name;
+                this.age=age;
+                this.job=job;
+            }
+            add(a,b){return a+b;}
+            mult=function(a,b){
+                return a*b; //몰라도됨
+            } 
+        }
+        console.log(new Person("나나","22","누누"));
+
+        let p=new Person("다다","11","두두");
+        let p2=new Person("라라","11","루루");
+        let p3=new Person("마마","11","무무");
+        console.log(p,p2,p3);
+        console.log(p.add(10,20),p.mult(5,7));
+        
+
+        let person={name:"아아",age:11, job:"우우"};
+        let person2={name:"아아",age:11, job:"우우"};
+        let person3={name:"아아",age:11, job:"우우", add(a,b){return a+b}};
+        let person4={name:"아아",age:11, job:"우우", add:function(a,b){return a+b}};
+        console.log(person,person2,person3,person4);
+        console.log(p.add(10,20),p.mult(5,7));
+        
+
+
+        
+        
+        
+
+
+
+
+
+
+
+        
+
+
+    </script>
+    
+</body>
+</html>

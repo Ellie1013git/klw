@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>document ul>li{$}*5</title>
+</head>
+<body>
+    <h1>document 실습</h1>
+    <h2>sumUl>li의 모든 수를 더하세요.</h2>
+    
+    <ul id="sumUl">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>
+        <li>10</li>
+        <li>11</li>
+        <li>12</li>
+        <li>13</li>
+        <li>14</li>
+        <li>15</li>
+        <li>16</li>
+        <li>17</li>
+        <li>18</li>
+        <li>19</li>
+        <li>20</li>
+        <li>21</li>
+        <li>22</li>
+    </ul>
+    <h3>multUl>li의 모든 수를 곱하세요.</h3>
+    <ul id="multUl">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+    </ul>
+    <h4>filterUl>li의 수인 것만 배열로 만드세요</h4>
+    <ul id="filterUl">
+        <li>1</li>
+        <li>2</li>
+        <li>칠</li>
+        <li>3</li>
+        <li>4</li>
+        <li>팔</li>
+        <li>5</li>
+    </ul>
+    <script>
+        //for of로 li 내의 모든 수를 더하세요.
+        const sumUl=document.getElementById("sumUl");
+        const sumLis=sumUl.getElementsByTagName('Li'); //태그 내에서 찾기가능
+        console.log(sumLis);
+
+        let result=0;
+        for(let li of sumLis){
+            
+            let num=Number(li.innerText); //innerText는 li 안에 텍스트들을 말함. Number로 감싸서 숫자로 만들었음
+            result+=num;
+        }
+        console.log(result); //253
+        
+        //Array의 reduce나 forEach 이용
+        //THMLCollection => Array의 forEach나 Reduce를 사용할 수 없다.
+        //시퀀스가 존재하는 자료구조를 Array 타입으로 변경 Array.from()
+
+        let sumUlLis=document.getElementById("sumUl").getElementsByTagName("Li");
+        console.log(sumUlLis); //HTMLCollection(22) [li, li, li, li, li, li, li, li, li, li, li, li, li, li, li, li, li, li, li, li, li, li]
+        sumUlLis=Array.from(sumUlLis);
+        console.log(sumUlLis);//(22) [li, li, li, li, li, li, li, li, li, li, li, li, li, li, li, li, li, li, li, li, li, li] //배열로 바뀌어서 Array Method를 사용가능
+
+        let sum=sumUlLis.reduce((init,item)=>{
+            //item == li 객체
+            let num=Number(item.innerText);
+            return init+num;//init+=num 
+        },0)
+        console.log(sum);
+        
+
+        
+
+    </script>
+</body>
+</html>

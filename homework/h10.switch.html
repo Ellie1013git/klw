@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>switch 연습</title>
+</head>
+<body>
+    <h1>switch 연습</h1>
+    <ul>
+        <li>switch구문으로 let a=11;의 수가 짝수인지 홀수인지 콘솔에 출력하세요.</li>
+        <li>setGrade를 switch로 작성하는 데 "+"를 제외하세요.</li>
+        <li></li>
+    </ul>
+    <script>
+
+        //switch구문으로 let a=11;의 수가 짝수인지 홀수인지 콘솔에 출력하세요.
+
+        let a=11;
+        let key=a%2;
+        switch (key) {
+            case 1 : 
+                console.log("홀수입니다.");
+                break;
+            default:
+            console.log("짝수입니다.");
+                break;
+        }
+
+        //setGrade를 switch로 작성하는 데 "+"를 제외하세요.
+
+        function setGrade(score) {
+            let key=Math.floor(score/10);
+            let grade="";
+            let key2=Math.round(score/10)-key;
+            let plus="";
+            switch(key){
+                case 10:
+                    grade="A+";
+                break;
+                case 9:
+                    grade="A";
+                break;
+                case 8:
+                    grade="B";
+                break;
+                case 7:
+                    grade="C";
+                break;
+                case 6:
+                    grade="D";
+                break;
+                default:
+                    grade="F";
+            }
+            switch(key2){
+                case 1:
+                    plus="+"
+                break;
+                default :
+                    plus=""
+            }
+            return grade+plus;
+        }
+        console.log(setGrade(77));
+
+        function setGrades(scores) {
+            let grades=[];
+            for(let i=0; i<scores.length; i++){
+                grades.push(setGrade(scores[i]));
+            }
+            return grades;
+        }
+        let scores=[100,99,90,88,83,76,70,67,60,53]
+        console.log(setGrades(scores));
+
+
+
+    </script>
+
+</body>
+</html>

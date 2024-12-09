@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>제어문 실습</title>
+</head>
+<body>
+    <h1>제어문 실습</h1>
+    <ul>
+        <li>1. prompt로 입력받는 수가 음수인지 양수인지 알려주는 제어문을 작성하세요.</li>
+        <li>2. let num=-7; 음수인지 양수인지 알려주는 제어문을 작성하세요</li>
+        <li>위 수를 prompt로 받으세요</li>
+        <li>let score=87; let grade=null; grade를 score에 맞게 참조시키세요. (100~90 A) (90~80 B) (80~70 C) (70~60 D)</li>
+    </ul>
+
+    <script>
+        function ifTestSelf(){
+      let num=prompt("숫자를 입력하세요");
+      num=Number(num)
+        if(num>=0){ // > < 비교연산, +를 제외한 수학연산을 하면 자동으로 수로 형변환한다
+            if(num==0){
+                alert("0입니다")}
+                else{
+            alert("양수입니다")
+        }
+        }else{
+            alert("음수입니다")
+        }
+    }
+    //ifTestSelf()
+
+    function ifTestWork(){
+
+        let score=prompt("점수입력");
+        let grade=null;
+        if(score>100){
+            alert("점수잘못입력");
+        }
+        else if(score>=90){ //(score>=90 && score<=100) 이런식으로 계속 써줘도 되긴함. 귀찮을뿐
+            grade="A";
+        }else if(score>=80){
+            grade="B";
+        }else if(score>=70){
+            grade="C";
+        }else if(score>=60){
+            grade="D";
+        }else {
+            alert("공부좀 열심히 하세요");
+            grade="F";
+        };
+        console.log(grade);
+    }
+    //ifTestWork()
+
+    function ifTestWork2(){
+    let score=200;
+    let g=null;
+    if(score<=100 && score>=0){
+        if(score>=90){ 
+            g="A";
+        }else if(score>=80){
+            g="B";
+        }else if(score>=70){
+            g="C";
+        }else if(score>=60){
+            g="D";
+        }else {
+            g="F";
+        }
+    }else{
+            g="점수를 잘못 입력"
+        }
+        console.log(g);
+    }
+
+    //함수(gradeSystem)로 변경(과제) 매개변수는 score 반환값은 grade
+
+    function gradeSystem(score) {
+        let grade=null;
+    if(score<=100 && score>=0){
+        if(score>=90){ 
+            grade="A";
+        }else if(score>=80){
+            grade="B";
+        }else if(score>=70){
+            grade="C";
+        }else if(score>=60){
+            grade="D";
+        }else {
+            gradeg="F";
+        }
+    }else{
+        grade="점수를 잘못 입력"
+        }
+    return(grade);
+          
+    }
+    console.log(gradeSystem(99))
+    
+
+
+    </script>
+</body>
+</html>

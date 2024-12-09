@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>변수와 숫자와 입력과 출력</title>
+</head>
+<body>
+    <h1>prompt로 수 2개를 입력받아서 두 수의 곱한 값을 alert으로 출력하세요</h1>
+    <ul>
+        <li>입력과 출력에 대한 이해</li>
+        <li>2개를 입력받아서 변수에 참조</li>
+        <li>데이터의 종류와 형변환(문자여->숫자)</li>
+        <li>연산에 대한 이해</li>
+    </ul>
+<!--    <form action="#" id="hw">
+        <p>
+            <label for="#">
+                a : <prompt id=aInput type="text" value="22">
+            </label>
+        </p>
+        <p>
+            <label for="#">
+                b : <prompt id=bInput type="text" value="33">
+            </label>
+        </p>
+
+    </form>
+-->
+
+
+    <script>
+        let a=Number(window.prompt("a값"))
+        let b=Number(window.prompt("b값"))
+
+        window.alert(a*b);
+        
+    </script>
+    
+</body>
+</html>

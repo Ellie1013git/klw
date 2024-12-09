@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>document ul>li{$}*5</title>
+</head>
+<body>
+    <h1>document 실습</h1>
+    <h2>sumUl>li의 모든 수를 더하세요.</h2>
+    <ul id="sumUl">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>
+        <li>10</li>
+        <li>11</li>
+        <li>12</li>
+        <li>13</li>
+        <li>14</li>
+        <li>15</li>
+        <li>16</li>
+        <li>17</li>
+        <li>18</li>
+        <li>19</li>
+        <li>20</li>
+        <li>21</li>
+        <li>22</li>
+    </ul>
+    <h3>multUl>li의 모든 수를 곱하세요.</h3>
+    <ul id="multUl">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+    </ul>
+    <h4>filterUl>li의 수인 것만 배열로 만드세요. [li{1},li{2},li{3},li{4},li{5}] 위의 배열에서 [1,2,3,4,5]로만 된 배열을 만드세요. map</h4>
+    <ul id="filterUl">
+        <li>1</li>
+        <li>2</li>
+        <li>칠</li>
+        <li>3</li>
+        <li>4</li>
+        <li>팔</li>
+        <li>5</li>
+    </ul>
+    <script>
+        const sumUl=document.getElementById("sumUl");
+        const sumUlLis=sumUl.getElementsByTagName("li");
+        //console.log(sumUlLis);
+        
+//방법1
+        // let sum=0;
+        // for(let li of sumUlLis){
+        //     //console.log(li.innerText); //값 쭈르륵 나오는거 확인
+        //     let num=Number(li.innerText);
+        //     sum+=num;
+        // }
+        // console.log(sum);
+//방법2
+        // const sumUlLisArr=Array.from(sumLis); //Array.from : HTMLCollection을 Array로 바꾸는 메소드
+        // let sum=0;
+        // const sumFun=(li,i)=>{
+        //     sum+=Number(li.innerText)
+        // };
+        // sumUlLiArr.forEach(sumFun);
+        // console.log(sum);
+//방법3
+        console.log(sumUlLis);
+        const sumUlLiArr=Array.from(sumUlLis);
+        console.log(sumUlLiArr);
+        
+        let sum=sumUlLiArr.reduce((init,li)=>Number(li.innerText)+init,0);
+        console.log(sum);
+        
+// 모든 수 곱하기
+        
+        const multUlLis=document.getElementById("multUl").getElementsByTagName("li");
+        console.log(multUlLis);
+    //방법1 for of (외부반복문)
+        // let mult=1;
+        // for(let li of multUlLis){
+        //     let num2=Number(li.innerText);
+        //     mult*=num2;
+        // }
+        // console.log(mult);
+    //방법2 map (내부반복문)  => 내부반복문이 간편하고 많이 써서 익숙해져야함.
+        const multUlLiArr=Array.from(multUlLis);
+        let nums=multUlLiArr.map((li)=>Number(li.innerText));
+        console.log(nums); //[1, 2, 3, 4, 5]
+        mult=nums.reduce((init,num)=>init*num);
+        console.log(mult);
+        
+//수인 것만 배열만들기
+        const filterUl=document.getElementById("filterUl");
+        const filterUlLis=Array.from(filterUl.getElementsByTagName("li"));
+        console.log(filterUlLis);//(7) [li, li, li, li, li, li, li]
+        let numLis=filterUlLis.filter((li)=>!isNaN(li.innerText));
+        console.log(numLis);//(5) [li, li, li, li, li]
+
+        nums=numLis.map((li)=>Number(li.innerText));
+        console.log(nums); //(5) [1, 2, 3, 4, 5]
+        
+        
+
+
+  
+    </script>
+</body>
+</html>

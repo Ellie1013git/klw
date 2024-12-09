@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문자열과 배열 실습</title>
+</head>
+<body>
+    <h1>문자열과 배열 실습</h1>
+    <ol>
+        <li>"안녕"=="안녕" : true. 둘 다 문자열이자 기본데이터로 같음</li>
+        <li>"안녕"==new String("안녕) : true. "안녕"은 문자열로 기본데이터지만, 뒤의 안녕은 new  String으로 객체인 자료형데이터임. 하지만 js는 문자열은 기본데이터로 보는 경향이 있어(value-기본데이터만 비교해서) true.</li>
+        <li>"안녕"===new String("안녕") : false. "안녕"은 문자열로 기본데이터지만, 뒤의 안녕은 new  Stringd으로 객체인 자료형데이터임. 저장위치가 달라 == 와 달리 ===로 비교연산하면 false가 나옴</li>
+        <li>['안','녕']==['안','녕'] : false. 둘 다 배열(array)로 자료형 데이터이기에 비교할수가 없음.</li>
+        <li>사과, 배, 자두, 딸기를 순서대로 저장하는 배열 자료를 생성해보세요.</li>
+        <li>위 자료에서 index가 2인 자료를 출력하세요.</li>
+        <li>위 자료에 '수박'을 추가하세요</li>
+        <li>위 자료의 길이를 출력하세요.</li>
+        <li>typeof "안녕" : string</li>
+        <li>typeof new String("안녕") : object (object string)</li>
+    </ol>
+
+    <script>
+        let arr=['사과', '배', '자두', '딸기'];
+        console.log(arr);
+        console.log(arr[2]);
+        arr.push("수박");
+        console.log(arr);
+        console.log(arr.length);
+
+        console.log(typeof new String("안녕"));
+        
+
+        
+        
+    </script>
+</body>
+</html>

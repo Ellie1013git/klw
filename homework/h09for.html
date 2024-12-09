@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>for 반복문 연습문제</title>
+</head>
+<body>
+    <h1>for 반복문 연습문제</h1>
+    <script>
+        //1. 구구단을 출력하는 함수를 만드세요.
+        //gugudan(2);
+        //2*1=2
+        //2*2=4
+        //...2*9=18
+
+       function gugudan(dan) {
+            for(a=1;a<10;a++){
+                console.log(a+"*"+dan+"="+dan*a);        
+            }            
+      }
+      gugudan(2);
+
+        //2. powArr(2); => [2,4,8,16 ......1024(2의10승까지)] 배열을 반환
+
+        function powArr(num) {
+            let arr=[];
+            for(b=0; b<=9; ++b){              
+                arr.push(num**b);
+            }
+            console.log(arr);
+        }
+        powArr(2);
+
+        //3. let score=[66,77,90,80,50,88]
+        //   let grades=[]
+        // 위의 socre를 성적내서 grades로 반환하는 함수를 만드세요
+        //=>["D","C","A","B","F","B"]
+    
+        function setGrades(score) {
+            let grades=[];
+            let g;
+            for(i=0; i<score.length; i++){
+                if(score[i]<=100 && score[i]>=0){
+                    if(score[i]>=90){
+                        g="A";
+                    }
+                    else if(score[i]>=80){
+                        g="B";
+                    }
+                    else if(score[i]>=70){
+                        g="C";
+                    }
+                    else if(score[i]>=60){
+                        g="D";
+                    }
+                    else if(score[i]>=50){
+                        g="E";
+                    }else {
+                        g="F";
+                    }
+                }else{
+                    g="오타"
+                }
+                grades.push(g);
+            }
+            return grades;
+        }
+        let score1=[66,77,90,80,50,88,200]
+        console.log(setGrades(score1))
+        
+    
+    
+    
+    /*    function setGrades(score){
+            let grade=[];
+
+            for(let i=0; i<score.length; i++){
+                let g;
+                if(score[i]>=90){ 
+                    g="A";
+                }else if(score[i]>=80){
+                    g="B";
+                }else if(score[i]>=70){
+                    g="C";
+                }else if(score[i]>=60){
+                    g="D";
+                }else {
+                    g="F";
+                }
+                grade.push(g)
+            }
+            return grade;
+        }
+        let score = [66, 77, 90, 80, 50, 88];
+        let grade = setGrades(score);
+        console.log(grade);
+
+        */
+
+    </script>
+</body>
+</html>

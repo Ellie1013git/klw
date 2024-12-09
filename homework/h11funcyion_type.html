@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>함수정리 및 예제</title>
+</head>
+<body>
+    <h1>함수정리 및 예제</h1>
+    <h2 id="title">누르면 붉은색으로 바뀌는 제목</h2>
+    <h3 id="title2">누르면 푸른색으로 바뀌는 제목</h3>
+    <h4 id="title3">누르면 푸른색으로 바뀌는 제목</h4>
+    <h5 id="title4">누르면 푸른색으로 바뀌는 제목</h5>
+    <h6 id="title5">누르면 푸른색으로 바뀌는 제목</h6>
+    <h7 id="title6">누르면 붉은색으로 바뀌는 제목</h7>
+
+
+    <script>
+        //콜백함수를 화살표함수로 만들어보세요.
+        title.onclick= () => {
+            title.style.color="red";
+            //화살표 함수는 this를 컴파일시 부모블럭의 객체를 바인딩함(현재는 window를 바인딩함)
+        }
+
+        title2.onclick=function(){
+            this.style.color="blue";
+            //이 this는 함수에 포함된 객체를 바인딩한다.
+        }
+
+        title3.onclick=function () {
+            window.setTimeout(function(){
+                this.style.color="blue";
+            },1000);//setTimeout의 콜백함수로 정의되었기 때문에 this는 window
+        }//오류
+
+        title4.onclick=function(){
+            window.setTimeout(()=>{
+                this.style.color="blue";
+            },1000); //화살표의 상단 블럭이 title4의 함수 블럭이라 this=title4 
+        }//화살표함수에 프로토타입이 없기 때문
+
+        title5.onclick=function () {
+            window.setTimeout(function(){
+                this.style.color="blue";
+            }.bind(title5), 1000);
+        }//강제로 this를 다른 객체로 바인딩(화살표함수는 불가능)
+
+        title6.onclick= () => {
+            window.setTimeout(() => {
+                title6.style.color="red";
+            }, 1000);
+            }//간단하긴 하지만 코드가 길어지면 this 사용이 더 편함
+
+
+
+
+        //일반적 함수: 보통프로그래머(객체지향 프로그램을 전공한 개발자)에게 함수란 연산의 집합이다.(자료형이 아니라 자료형에 포함된 필드다) 특징으로 재사용, 모듈화, 입출력, 캡슐화가 있음.
+        //자바스크립트에서 함수(함수형 언어) : 함수가 타입이 될 수 있다. 즉, 함수가 매개변수가 될 수 있다.(함수가 자료형이다)
+        //모든 프로그램에서 매개변수는 데이터만 가능(데이터는 연산의 집합이지 데이터가 아님)
+        //데이터 : 기본형, 자료형
+
+        function add(a,b){
+            return a+b;
+        }
+        console.log(add.prototype);
+        //프로토타입은 객체를 만들기 휘해 미리 생성한 객체. 또한 앞으로 생성될 객체의 부모가 된다.
+        
+        //함수가 매개변수가 된다는 것은?
+        class Calc{
+            constructor(add){ //calc를 만들때 add 함수를 재정의 해서 사용해라.
+                this.add=add;
+            }
+        }
+        const calc=new Calc(add); //위의 function add를 calc의 매개변수로 사용함. 함수형 언어에서 함수를 재정의하는 방법
+        //자바를 포함한 대부분의 객체지향 프로그래밍 언어에서 함수를 매개변수로 사용하는 문법적 설탕을 지원한다.
+
+
+        class AddOper{
+            add(a,b){
+                return a+b;
+            }
+        }
+        const calc2=new Calc(new AddOper()) //객체지향 프로그래밍에서 함수를 재정의하는 방법
+        console.log(calc2(1,2));
+        
+    </script>
+</body>
+</html>
