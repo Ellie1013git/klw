@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>스레드간의 동기화와 promise 객체</title>
+</head>
+<body>
+    <h1>스레드간의 동기화와 promise객체</h1>
+    <script>
+        //스레드를 생성하는 함수:setInternal(), setTimeout(), XMLHTTPTequest.send()
+        let a=0;
+        setTimeout(() => {
+           a=10; 
+        }, 1);
+        console.log(a); //0 : 스레드간의 비동기 상태가 발생했기 때문
+        //서로 다른 스레드간의 상태를 동기화 시키는 방법은, 스레드가 종료되는 시점까지 기다리는 방법 뿐이다.(onload, promise 객체를 사용)
+        //Promise의 콜백함수 인수 resolve :특정시점을 동기화
+        a=0;
+        new Promise((resolve)=>{
+            setTimeout(() => {
+                a=100;
+                resolve() //이 시점에 다음 코드를 동기화 하겠다.
+            }, 1000);
+        }).then(()=>{
+            console.log(a); //1초뒤에 100
+        }) //promise 객체로 스레드간의 동기화! 요즘은 사용하지 않지만 알고있어야함
+
+        a=0;
+        new Promise((resolve)=>{
+            setTimeout(() => {
+                a=77;
+                resolve("성공");
+                setTimeout(() => {
+                    a=100;
+                }, 1);
+            }, 2000);
+        }).then((msg)=>{
+            console.log(a);//77
+           // alert(msg+":"+a);   //성공:77         
+        });
+        //then()이 콜백함수를 실행하는 시점은 이전 콜백함수에서 resolve를 실행하는 시점이고
+        //resolve의 메시지 형식 매개변수를 then의 콜백함수로 전달할 수 있다.
+
+
+        //Promise Chaning (프라이미스를 계속 연결하기)
+        a=0;
+        new Promise((resolve)=>{
+            setTimeout(() => {
+               a=7777;
+               resolve(a); 
+            }, 2000);
+        }).then((msg)=>{
+            document.write("msg="+msg+"<br>");
+            return new Promise((resolve)=>{
+                setTimeout(() => {
+                    msg*=2;
+                    resolve(msg);
+                }, 2000);
+            });
+        }).then((msg)=>{
+            document.write("msg="+msg+"<br>");
+            return new Promise((resolve)=>{
+                setTimeout(() => {
+                    msg+=" 안녕하세요";
+                    resolve(msg);
+                }, 2000);
+            })
+        }).then((msg)=>{
+            document.write("msg="+msg);
+        })
+
+
+    </script>
+</body>
+</html>

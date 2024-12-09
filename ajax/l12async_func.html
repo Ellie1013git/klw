@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>async 함수로 스레드 실행을 간단하게 동기화 해봅시다.</title>
+</head>
+<body>
+     <h1>async 함수로 스레드 실행을 간단하게 동기화 해봅시다.</h1>
+     <p>Promise 객체를 실행 후 동기화 하는 함수 async, async는 자동으로 Promisification하여 코드를 작성해 주는 함수다.</p>
+     <ul>
+        <li>async function : await로 Promise 객체의 then 함수를 실행할 수 있다.
+            이때 then의 첫번째 콜백함수의 첫번째 매개변수를 반환한다.
+        </li>
+        <li>let resolve=await new Promise();</li>
+        <li>let response=await fetch()</li>
+        <li>new Promise(). then((resovle)=>{})</li>
+        <li>fetch().then((response)=>{})</li>
+        <li>async 함수로 reject를 반환받고 사용할 수 없기 때문에 try catch 로만 오류를 핸들링한다.</li>
+     </ul>
+     <script>
+        const a=async function () {
+            try{
+                let res=await fetch("../homework/l19baskets.json");
+                if(res.status!==200) throw res.status;
+
+                let obj=await res.json();
+                console.log(obj);
+
+                res=await fetch("../homework/l18products.json");
+                if(res.status!==200) throw res.status;
+                obj=await res.json();
+                console.log(obj);
+            }catch(e){
+                alert("통신실패 :"+e)
+            }
+                
+            }
+            a();
+     </script>
+</body>
+</html>
