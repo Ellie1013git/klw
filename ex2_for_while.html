@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>연습노트2</h1>
+    <script>
+    
+    //star 5개 프린트 하기(for)
+    function printStar(n) {
+        let i=0;
+        let stars="";
+        while(i<=n){
+            stars += "*";
+            i++;
+        }
+        console.log(stars);
+        
+    }
+    printStar(5);
+
+    //구구단 출력하기(for)
+
+    function multiplicationTable(num) {
+        for(let i=1; i<10; i++){
+            document.write(`${num}*${i}=${num*i}<br>`);
+            console.log(`${num}*${i}=${num*i}`);
+        }
+    }
+    multiplicationTable(2);
+
+    //짝홀 구분하기(for)
+
+    function oddEven(number) {
+        let oE=[];
+        let n;
+        for(let i=0; i<number.length; i++){
+            if(number[i]%2===0){
+                n="Even";
+            }else{
+                n="Odd";
+            }
+            oE.push(n);
+        }
+        return oE;
+    }
+    let number1=[4,5,6,7,8,9];
+    console.log(oddEven(number1));
+
+    //1부터 N까지 합 구하기(while)
+
+    function sumUpToN(sn) {
+        let i=1;
+        let sum=0;
+        while(i<=sn){
+            sum +=i;
+            i++;
+        }
+        return sum;
+    }
+    console.log(sumUpToN(5));
+
+    //숫자가 100보다 큰지 확인하기 (while)
+    
+    function checkNumber() {
+    let num;
+    while (true) {
+        num = prompt("Enter a number (enter 0 to stop):");
+        num = parseInt(num);
+        if (num === 0) break;
+        
+        if (num > 100) {
+            console.log("big");
+        } else {
+            console.log("small");
+        }
+    }
+}
+
+checkNumber();
+
+    //주어진 수가 소수인지 확인하기(while)
+    function prime(num) {
+        let num=7;
+        let i=1;
+        while(i<num){
+            if(num%i===0){
+                return "not prime";
+            }
+            i++;
+        }
+        return "prime";
+        
+    }
+
+    </script>
+</body>
+</html>

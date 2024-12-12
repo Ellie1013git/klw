@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>object를 이용해서 switch를 작성하자</title>
+</head>
+<body>
+    <h1>object를 이용해서 switch를 작성하자</h1>
+    <p>switch 문보다 코드가 간결해서 많은 js개발자들이 사용한다.
+       (단점, else가 없고, 약속되어있지 않은 조건문이라 코드가 어려울 수 있다.)</p>
+    
+    <script>
+        let obj=new Object(); //{}
+        obj["안녕"]="인사입니다.";
+        obj.잘가="헤어지는 인사입니다.";
+        obj.밥먹기=function(){
+            console.log("냠냠냠 맛있다.");
+        }
+        //object를 정상적으로 정의하고 사용하는 법
+        console.log(obj);
+        obj.밥먹기();//함수 실행시 꼭 소괄호 붙이세요.
+        console.log(obj.잘가);
+        
+        //오브젝트 리터럴 표기법을 switch처럼 사용하기
+        //==switch 대신에 오브젝트 사용!
+        let gradeObj={
+            10:"A",
+            9:"B",
+            8:"C",
+            7:"D",
+            6:"E",
+            5:"F", 4:"F", 3:"F", 2:"F", 1:"F", 0:"F"
+        }
+        //else 문법이 없다. 그래서 위에 처럼 다 설정해줘야 함.
+        //switch와 다른점은 case, break; 가 없어서 간결함. 나머지는 같음
+
+       let score=66;
+       score=Math.floor(score/10);//6.6 -> 6 (floor:내림)
+       console.log("당신의 성적은",gradeObj[score]);
+        
+
+    </script>
+    
+</body>
+</html>

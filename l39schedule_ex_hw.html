@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>노드개체 생성과 일정관리 어플</title>
+</head>
+<body>
+    <h2>일정 관리 어플</h2>
+    <hr>
+    <ul id="appUl"></ul>
+    <hr>
+    <form name="appForm" action="#">
+        <p>
+            <label>시간
+                <input type="time" name="time">
+            </label>
+            <label>
+                일정
+                <input type="text" name="content" value="양치하기">
+            </label>
+            <button type="submit">등록</button>
+        </p>
+    </form>
+    <script>
+        const appUl=document.getElementById("appUl");
+        const appForm=document.forms.appForm;
+       const appObj={800:"점심", 450:"양치"};
+       console.log(appObj);
+       
+       const strTime=function(time){
+           let h=Math.floor(time/60);
+           let m=time%60;
+           return h+"시 "+m+"분   ";
+        }
+        const numTime=function(strTime){
+            let arr=(strTime.split(":"));
+            return Number(arr[0])*60+Number(arr[1]);
+            //
+            
+        }
+        
+        
+        function deleteArr(key){
+           delete appObj[key];
+           printAppObj();
+     }
+        const printAppObj=function(){
+            appUl.innerHTML="";
+            for(let key in appObj){
+                let li=document.createElement("li");
+                let b=document.createElement("b");
+                let span=document.createElement("span");
+                b.innerText=strTime(key);
+                span.innerText=appObj[key];
+                
+                const delBtn=document.createElement("button");
+                delBtn.innerText="삭제";
+                delBtn.onclick=function(){
+                    deleteArr(key);
+                }
+                li.append(b);
+                li.append(span);
+                li.append(delBtn);
+                appUl.append(li);
+            }
+        }
+        printAppObj();
+        
+        appForm.onsubmit=function(e){
+            e.preventDefault();
+            let time=this.time.value;
+            let content=this.content.value;
+            time=numTime(time);
+
+            if(time in appObj){
+                let result=confirm("이미 등록된 시간입니다. 바꾸시겠습니까?");
+                if(result){
+                appObj[time]=content;
+                }
+            }else{
+                appObj[time]=content; 
+            }
+
+            appObj[time]=content;
+            printAppObj();            
+        }
+
+    </script>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</body>
+</html>

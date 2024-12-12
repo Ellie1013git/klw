@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>컴파일 시점에 this위치에 따라 바인딩되는 화살표함수 이용하기</title>
+</head>
+<body>
+    <h1>컴파일 시점에 this위치에 따라 바인딩되는 화살표함수 이용하기</h1>
+    <p>함수의 this는 함수를 포함하는 객체를 바인딩하지만, 화살표 함수가 선언된 시점에 존재하는 위치에 this가 바인딩된다. 그것을 이용하는 예시입니다.</p>
+    <h5 id="clock1"></h5>
+    <h5 id="clock2"></h5>
+    <ul>
+        <li>
+            <button id="clock1StartBtn">시계1 시작(콜백함수를 함수로)</button>
+        </li>
+        <li>
+            <button id="clock2StartBtn">시계2 시작(콜백함수를 화살표함수로)</button>
+        </li>
+    </ul>
+
+    <script>
+ /*       const digitClock=function(){
+           //clock1.innerText=new Date().toLocaleString();
+           
+           //버튼에 시간을 출력
+           this.innerText=new Date().toLocaleString();
+           //this가 clock1버튼에 있는게 아니라
+           //this가 window.setInternal에 들어있어서 실행 안됨.
+
+           
+        }
+        clock1StartBtn.onclick=function(){
+            window.setInterval(digitClock,1000);
+        }
+
+        console.log(digitClock,1000);
+*/
+
+        clock1StartBtn.onclick=function(){
+            window.setInterval(function(){
+                this.innerText=new Date().toLocaleString();
+                //this가 clock1버튼에 있는게 아니라
+                //현재 해당 콜백함수는 window.setinterval이 실행중이기 때문에 this는 window다.
+            }.bind(clock1StartBtn),1000)
+        }
+        //함수에 바인드를 하는 것이 귀찮아서 화살표함수를 많이 사용합니다.
+
+        clock2StartBtn.onclick=function(){
+            window.setInterval(()=>{
+                this.innerText=new Date().toLocaleString();
+            },1000)
+        }//화살표함수의 this객체와는 관련없이 컴파일되면서 해당 위치의 상위객체를 바인딩한다.
+
+    </script>
+</body>
+</html>

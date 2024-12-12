@@ -1,0 +1,155 @@
+자바스크립트에서 함수는 작성 방식과 사용하는 목적에 따라 다양한 종류로 나뉩니다. 주요 함수의 종류는 다음과 같습니다.
+
+1. 일반 함수 (Function Declaration / Expression) - 기본 함수
+가장 일반적인 형태의 함수입니다.
+function 키워드를 사용하여 선언하고, 호출할 때마다 별도의 this 값을 가집니다.
+함수 선언과 함수 표현식 두 가지 방식으로 작성할 수 있습니다.
+함수 선언식은 코드 작성 시 제일 먼저 정의되고, 이후 어디서든 호출할 수 있어요.
+
+// 함수 선언문
+function greet() {
+    console.log("Hello!");
+}
+
+// 함수 표현식
+const greet = function() {
+    console.log("Hello!");
+};
+
+
+예)function greet(name) {
+  return "Hello, " + name + "!";
+}
+
+console.log(greet("Alice")); // Hello, Alice!
+
+위 코드에서는 greet라는 함수를 선언했고, name이라는 매개변수를 받아서 환영 메시지를 반환합니다. 함수 선언식은 코드 작성 초기에 정의되므로 나중에 어디서든 호출할 수 있어요.
+
+
+2. 콜백 함수 (Callback Function)
+다른 함수에 인자(인수)로 전달되어 특정 조건에 따라 호출되는 함수입니다.
+비동기 작업(예: 데이터 로딩, 시간 지연)에서 주로 사용되며, 특정 작업이 끝난 후 실행하고 싶은 작업을 정의할 때 유용합니다.
+
+예1)
+function performAction(callback) {
+    callback();
+}
+
+performAction(() => {
+    console.log("Callback function executed!");
+});
+
+예2)
+function fetchData(callback) {
+  setTimeout(() => {
+    console.log("Data fetched!");
+    callback();
+  }, 2000);
+}
+
+function afterFetch() {
+  console.log("This runs after data is fetched.");
+}
+
+fetchData(afterFetch);
+// Data fetched!
+// This runs after data is fetched.
+
+fetchData 함수는 callback 함수를 인수로 받아, 데이터를 불러온 후(여기서는 2초 후) callback 함수를 실행합니다.
+
+
+3. 익명 함수
+익명 함수는 이름이 없는 함수입니다. 주로 일회성 작업이나 콜백으로 사용됩니다. 익명 함수는 함수를 변수에 직접 할당할 때 자주 사용되며, 다른 함수의 인수로도 전달됩니다.
+
+let sayGoodbye = function(name) {
+  return "Goodbye, " + name + "!";
+};
+
+console.log(sayGoodbye("Alice")); // Goodbye, Alice!
+
+위 코드에서는 sayGoodbye라는 변수에 익명 함수를 할당해 사용했습니다.
+
+
+4. 화살표 함수 (Arrow Function)
+ => 기호를 사용해 짧고 간결하게 작성할 수 있는 함수입니다.
+this 키워드의 바인딩 방식이 다르다는 특징이 있는데, this 바인딩이 없고, 선언된 위치의 this를 상속합니다.
+일반 함수보다 간결하며, 주로 콜백 함수나 간단한 함수에 사용됩니다.
+간단한 로직이나 배열 처리에서 자주 사용됩니다.
+
+예1)
+const greet = () => {
+    console.log("Hello!");
+};
+
+예2)
+const add = (a, b) => a + b;
+
+console.log(add(2, 3)); // 5
+
+위 코드의 add 함수는 두 수를 더하는 간단한 화살표 함수로, 매개변수를 받고 바로 결과를 반환합니다. 중괄호 {} 없이 한 줄로 작성하면 자동으로 값이 반환됩니다.
+
+5. 생성자 함수 (Constructor Function)
+주로 객체를 생성하기 위해 사용됩니다.
+new 키워드를 사용해 호출하며, 새로운 객체의 인스턴스를 반환합니다.
+this는 생성된 객체를 가리키게 되며, 객체에 속성을 할당할 수 있습니다.
+자바스크립트에서 사용자 정의 객체를 만들 때 주로 사용됩니다.
+
+function Person(name, age) {
+  this.name = name;
+  this.age = age;
+}
+
+const person1 = new Person("Alice", 25);
+console.log(person1.name); // Alice
+console.log(person1.age); // 25
+
+위의 Person 함수는 생성자 함수로, new 키워드로 호출할 때마다 새로운 객체가 생성됩니다. 이 객체는 name과 age 속성을 가집니다.
+
+
+6. 비동기 함수 (async/await)
+비동기 함수는 async 키워드를 사용해 정의하며, await 키워드와 함께 비동기 작업을 순차적으로 실행할 수 있게 해줍니다. 주로 네트워크 요청 같은 작업을 할 때 사용하며, 코드의 가독성을 높여줍니다.
+
+async function fetchData() {
+  let data = await fetch("https://api.example.com/data");
+  data = await data.json();
+  console.log(data);
+}
+
+fetchData();
+
+위 코드에서는 fetchData라는 비동기 함수를 정의하고, fetch로 데이터를 가져온 후 await로 응답이 올 때까지 기다립니다. 비동기 함수를 사용하면 프로미스 기반의 비동기 작업을 간단히 다룰 수 있습니다.
+
+
+
+
+
+
+
+
+4. 즉시 실행 함수 (Immediately Invoked Function Expression, IIFE)
+선언과 동시에 즉시 실행되는 함수입니다.
+주로 (function() { ... })() 형태로 작성하며, 한 번만 호출됩니다.
+전역 변수의 오염을 막기 위해 사용됩니다.
+
+(function() {
+    console.log("This function runs immediately!");
+})();
+
+
+
+
+6. 제너레이터 함수 (Generator Function)
+function* 키워드로 정의되고, 실행을 멈췄다가 재개할 수 있는 함수입니다.
+yield 키워드를 사용하여 일시 중지하며, 함수가 실행될 때마다 중간 결과를 반환합니다.
+
+function* generateSequence() {
+    yield 1;
+    yield 2;
+    yield 3;
+}
+
+const generator = generateSequence();
+console.log(generator.next().value); // 1
+
+
+이 외에도 클래스 메서드와 같은 특수한 경우에 사용되는 함수들도 있지만, 위의 종류가 기본적인 자바스크립트 함수의 주요 유형입니다.

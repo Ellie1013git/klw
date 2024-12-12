@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>object와 json</title>
+</head>
+
+<body>
+    <h1>object와 json(Javascript Object Notation 표기법)</h1>
+    <h2>JSON이란</h2>
+    <p>JSON은 자바스크립트에서 사용되는 객체 명세서의 문자열 데이터이다.</p>
+    <ul>
+        <li>데이터 통신을 하기 위해서 가장 상용화되고 많이 사용된 문서는 xml형식의 문서이다.</li>
+        <li>xml은 전송할 데이터를 태그로 구분해서 부모 자식 관계를 표현할 때 태그를 포함시켜서 표현한다.
+            : body>ul>li {textNode}작성
+        </li>
+        <li>xml이 마크를 앞뒤로 작성해야하기 때문에 용량이 크고(무겁고)
+            별도의 프로그램이 존재해야 태그에서 텍스트를 찾아 분리할 수 있다.
+            또한 DOM Tree에서 특정 노드 개체를 찾아 텍스트를 구분하는 것이 어렵다.
+        </li>
+        <li>JSON이 나오기 전까지는 xml 형식의 파일을 제외하고 텍스트를 구분하도록 할 대안이 없었다.</li>
+        <li>xml을 수정한 문서로서 HTML 웹이 등장할 당시 또한 xml문서만이 유일한 방법이었다.</li>
+    </ul>
+    <h2>JSON 장점</h2>
+    <ul>
+        <li>xml보다 내용 길이가 짧아서 가볍다 => 데이터 통신에 유리</li>
+        <li>xml의 textNode는 모두 문자열 data지만, JSON은 Number, String, Boolean, null, [](배열), {}(객체,Object) 데이터를 표현할 수 있다.</li>
+        <li>필드로 자료를 참조해서 탐색이 빠르다.(xml은 dom탐색 함수를 사용)</li>
+        <li>**JSON은 글자로 이루어진 data이기에 가볍고 통신에 유리하다.(xml은 형식이 있는 파일이기에 변환이 필요하다.)</li>
+        <li>다른 프로그래밍 언어(파이선 등)에서도 JSON의 객체를 변형하여 사용할 수있다. (모든 서버단(backend)에서 객체로 사용)</li>
+    </ul>
+    <h3>자바스크립트가 지원하는 JSON객체</h3>
+    <p>js에서는 json을 object로 파싱하거나 object를 json으로 출력을 지원하는 객체인 JSON을 지원합니다.</p>
+    <ul>
+        <li>parser, parsing(파서, 파싱) :
+            <ul>
+                <li>"13" => 13 (문자열 13을 숫자 13으로 바꾸는 것) : 출력X파싱O </li>
+                <li>13.3 => "13.3" : 출력(문자열의 표현)</li>
+                <li>"{\"key\":1}" => {key:1} : 파싱</li>
+                <li>{key:1} => "{\"key\":1"}" : 출력
+                    \" ~~ \" : ~~이 문자열이라고 표시해주는 기호
+                </li>
+            </ul>
+        </li>
+        <li>JSON.parse("{\"key\"":1}") : </li>
+        <li>JSON.stringify(new Object()) : object를 json으로 출력하는 함수</li>
+        <li></li>
+    </ul>
+    <script>
+        //h3 내용 설명
+        class User{
+            constructor(){
+                this.age=10;
+                this.arr=[1,2,3];
+                this.empty; // undefined; log안찍힘 // //(JSON.stringify 후 JSON.parse) 삭제
+                this.empty2=undefined; ////(JSON.stringify 후 JSON.parse)삭제
+                this.func=function(){}; //(JSON.stringify 후 JSON.parse) 삭제
+                this.id=Symbol('id');//(JSON.stringify 후 JSON.parse) 삭제
+                this.n=null;
+                this.name="liwon";
+                this.num=NaN; //(JSON.stringify 후 JSON.parse)null로 변경
+                this.obj={a:1.1};
+            }
+            protoFunc(){} //부모(User prototype)에게 함수정의; log안찍힘
+            func2=function(){} //객체마다에게 함수정의
+            innerClass=class{} //(JSON.stringify 후 JSON.parse) 삭제
+        }
+        const user=new User();
+        console.log(user); //User {name: 'liwon', age: 10, num: NaN, func2: ƒ, innerClass: ƒ, …} 
+        //age:10, arr: (3) [1, 2, 3], empty2: undefined, func: ƒ (), func2: ƒ (), id: Symbol(id), innerClass: class, n: null, name : "liwon", num :  NaN, obj: {a: 1.1}, [[Prototype]]: Object
+
+        let userJson=JSON.stringify(user); //JSON.stringify() : JSON 문자열(데이터 통신용 명세서)로 변경하는 함수 => 불필요한 것을 삭제하고 변경하게 됨(NaN=>null...)
+        console.log(userJson); //{"name":"liwon","age":10,"num":null,"n":null,"arr":[1,2,3],"obj":{"a":1.1}}
+        let userObj=JSON.parse(userJson); //JSON.parse() : JSON문자열을 객체로 변경하는 함수
+        console.log(userObj); //age: 10 arr: (3) [1, 2, 3] n: null name: "liwon" num: null obj: {a: 1.1} [[Prototype]]: Object
+        
+        
+        
+
+
+
+        console.log("--------------");
+        
+        //h2 내용 설명
+
+        //리터럴하게 생성
+        objMiran = { name: "미란", id: "cute" };
+        console.log(objMiran); //{name: '미란', id: 'cute'}
+
+
+        //추가해서 생성
+        let obj = new Object();
+        console.log(obj);//Object 또는 {}
+        obj.name = "두더지";
+        obj["id"] = "잡기";
+        console.log(obj);//{name: '두더지', id: '잡기'} :JSON (객체명세서)
+
+        //class 와 생성자 이용해서 생성
+        class Member {
+            constructor(name, id) {
+                this.name = name;
+                this.id = id;
+            }
+        }
+        obj = new Member("리원", "like");
+        console.log(obj); //Member {name: '리원', id: 'like'} // {name: '리원', id: 'like'} :JSON
+
+        //JSON은 객체가 아니라 객체를 문자열로 표현한 문자열('객체명세서')이다.
+        console.log(JSON.stringify(obj)); // {"name":"리원","id":"like"}
+
+        //json에서 작성할 수 없는 데이터 : 함수, 심볼, undefined, NaN, class
+
+        let json = `
+        {
+            "num":1,
+            "str":"문자열",
+            "boolean":true,
+            "empty":null,
+            "arr":[1,2,3,4]
+        }`;
+
+        console.log(json.boolean); //undefined(O), true(X)
+
+        //JSON.parse(json) : json을 객체로 바꾸는 함수
+        console.log(JSON.parse(json)); //{num: 1, str: '문자열', boolean: true, empty: null}
+        console.log(JSON.parse(json).arr[3]); //4
+        //console.log(json.arr[3]); //오류냠
+        //console.log(json.arr?[3]); //오류냠 => 배열이여서 옵셔널 체이닝 사용이 불가능
+        //옵셔녈 체이닝 대신 사용할 문법 : &&
+        console.log(json.arr && json.arr[3]);//undefined 
+
+
+        let members = [
+            {
+                "name": "리원",
+                "id": "like",
+                "age": "10",
+            }, {
+                "name": "미란",
+                "id": "cute",
+                "age": "9",
+            }
+        ];
+
+        console.log(document.getElementsByTagName("id")[2]);
+        console.log(members[1].id);
+    </script>
+
+</body>
+
+</html>

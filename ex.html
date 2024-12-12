@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=s, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>연습노트1</h1>
+    <script>
+       function testSelf(){
+       let ID='main'
+        let PW='A0123'
+
+        let userid=prompt("아이디입력")
+        let userpw=prompt("pw입력")
+
+        let result=(ID===userid&&PW===userpw)
+
+        console.log('결과는 : ',result);
+    }
+    //testSelf()
+
+    console.log(typeof(513));//number
+    console.log(typeof(10>100));//boolean
+    console.log(typeof('자바스트립트'));
+    console.log(typeof(5*4));
+    console.log(typeof(1/10));
+    
+    let n =5;
+    function printStar(n) {
+        let i=0;
+        let stars="";
+        while(i<=n){
+            stars += "*";
+            i++;
+        }
+    }
+    printStar(5);
+
+        
+    </script>
+</body>
+</html>

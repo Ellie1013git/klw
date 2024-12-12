@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>함수와 타입</title>
+</head>
+<body>
+    <h1>함수 function을 타입으로 사용해보자</h1>
+    <p>자바스크립트는 프로토타입언어 또는 함수형언어 또는 인터프리터언어라 불리는데
+        이때 함수형언어라 불리는 이유는 함수를 타입으로 정의할 수 있고 매개변수로 
+        사용가능하기 때문이다. ( 함수형언어 js <-> 객체[class]지향언어 java )
+    </p>
+    <h2>자바스크립트에서 사용하는 class 문법은 문법적 설탕이다.</h2>
+    <p>문법적 설탕(Syntactic sugar) : 실제하지 않지만 존재하는 것처럼 사용하는 문법
+        (자바스크립트는 class가 존재하지 않는 함수형 언어다.)
+    </p>
+    <script>
+        //회원가입 id,name....
+        class Member{
+            constructor(id,name){
+                //this는 함수 내부에서만 호출가능
+                this.id=id;
+                this.name=name;
+            }
+            //타입(프로토타입)에 함수를 선언하는 방식 => 항상 1개만 존재 
+            //new Member().hello(); new Member().hello(); new Member().hello(); new Member().hello();
+            //Member type 을 생성할 때 만들어진 프로토타입에 저장된 hello() 1개가 계속 호출됨
+            hello(){
+                console.log("안녕");
+            }
+            //객체에 직접 함수를 선언한 방식 => 객체를 만들때 마다 생성된다.
+            //new Member().hello2(); new Member().hello2(); new Member().hello2(); new Member().hello2();
+            //new Member()를 할 때 마다 hello2()함수가 객체에 들어져서 각자의 hello2()
+            hello2=function(){ //==function this.hello2=function(){}
+                console.log("안녕2");
+            }
+        }
+        //객체로 만들어서 log에 출력하세요!
+        const mem =new Member("develckm","최경민"); //상수로 참조하는 자료형을 고정한다.
+        //mem=10;
+        console.log(mem);
+        //함수 : 연산의 집합으로 사용되는 함수
+        function add(a,b){
+            let c=20;
+            return a+b+c;
+        }
+
+        //함수 : 타입으로 사용되는 함수
+        //이름이 다른(파스칼규칙) 것은 개발자간의 규칙
+        function User(id,name){
+            this.id=id;
+            this.name=name;
+            //return 쓸수는 있지만 작동되지 않는다. 
+            
+            //function hello(){console.log("안녕");}
+            
+            //hello2=function(){console.log("안녕2"); }
+            this.hello3=function(){
+                console.log("안녕3");   
+            }
+        }
+        console.log(Member.prototype); 
+        //함수나 class 선언하면 생성되는 프로토타입
+        
+        const user=new User("theNiceAcademy","더조은컴퓨터학원")
+        console.log(user);
+        //user.hello2();
+        user.hello3();
+
+        
+        //타입으로 사용하는 함수도 함수와 동작원리는 똑같다.
+        //단지 반환되는 것이 객체기 때문에 return이 동작하지 않는다.
+        const Mem=function(id,name){
+            this.id=id;
+            this.name=name;
+        }
+
+        const addAB=new Function("a","b","return a+b");//함수를 문자열이 아닌 객체로 작성하는 방법
+        //function addAB(a,b){return a+b};
+
+        //Function.prototype은 어떤 객체의 부모도 되지 않는다
+        //addAB.prototype.__proto__==Function.prototype(X)
+        console.log(addAB(9.9,8.8));//함수의 문자열 / 18.700000000000003
+        console.log(addAB.__proto__); // ƒ () { [native code] } 
+        // 함수의 문자열을 컴파일한 코드로 참조하고 있음 (native code : 컴퓨터가 인식하기 좋게 변형된 코드==low level 언어)
+        //안하는게 좋다. __proto__는 객체에만 존재하고 객체간 상속을 표현하는 링크입니다.
+        // 프로토타입 ㅣ언어에서 객체 생성(new)은 상속으로 만들어진다.(생성된 객체의 부모가 프로토타입인 이유임)
+        
+        // this : 객체지향과 프로토 타입 모두 (new 연산자로 호출할 때만)객체를 만들때만 실행되는 코드로 필드를 정의 및 참조할 때 사용
+        //**생성자 또는 함수에 정의된 this는 new 연산자로 호출 할 때만 객체에 생성하거나 참조된다.
+        //예시) this.add=function(){} : add 함수는 객체에만 존재
+        //예시) this.a="안녕" : a는 객체에서만 존재
+
+        console.log(addAB.prototype); //{}안에보면 constructor,prototype이 나온다
+        console.log(addAB.prototype.__proto__); //{__defineGetter__: ƒ, __defineSetter__: ƒ, hasOwnProperty: ƒ, __lookupGetter__: ƒ, __lookupSetter__: ƒ, …}
+
+        function func() {
+            //함수 : this를 정의하지 않을 때 그냥 함수
+            //=>js에서만 모든 함수는 new 연산자로 호출해서 객체로 만들 수 있다.
+            //this가 없으면 필드가 없는 빈 객체가 만들어진다.
+            return 10+20;
+        }
+
+        function func(a){
+            this.a=a;
+            //객체 : this 가 정의된 함수를 new 연산자로 호출할때
+            //return; //이미 new 연산자가 객체를 반환해서 return으로 무엇을 반환할 수 없다.
+
+        }
+
+
+        
+        
+        
+
+    
+        
+
+
+
+
+
+
+    </script>
+
+
+</body>
+</html>

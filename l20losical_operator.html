@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>논리연산자로 복잡한 제언문을 작성할 수 있게 하자</title>
+</head>
+<body>
+    <h1>논리연산자로 복잡한 제언문을 작성할 수 있게 하자</h1>
+    <p>논리연산은 비트연산과 비슷하다</p>
+    <ul>
+        <li>|| Or : 논리의 합</li>
+            <ul>
+                <li>true || true : true</li>
+                <li>false || true : true</li>
+                <li>true || false : true</li>
+                <li>false || false : false</li>
+                <li>**논리 합은 한개라도 true가 있으면 true</li>
+            </ul>
+        <li>&& And : 논리의 곱</li>
+            <ul>
+                <li>true && true : true</li>
+                <li>false && true : false</li>
+                <li>true && false : false</li>
+                <li>false && false : false</li>
+                <li>**논리 곱은 한개라도 false가 있으면 false</li>
+            </ul>
+        <li></li>
+    </ul>
+
+    <h2>논리연산과 중단 점(논리연산이 멈추는 지점)</h2>
+    <p>js 엔진은 논리연산에서, Or논리인경우엔 참(true)이, And논리인 경우엔 거짓(false)이 나올거라는 확신이 있다면 다음을 하지 않는다.</p>
+
+    <h2>논리연산의 우선순위</h2>
+    <p>우선순위는 곱하기>더하기.(논리연산과 산술연산중에선 수학연산이 우선순위)
+        a || b && c || b && d => a || (b && c) || (b && d) 
+        a && b || c && b || d => (a && b) || (c && b) || d
+    </p>
+    <script>
+        (false||false||false||false||false||console.log("안녕"));
+        //연산이 멈추지 않는다면 log가 출력될거다
+        (false||false||false||true||false||console.log("안녕2"));
+        (true||true||true||true||true||console.log("안녕"));
+        //true 라는 확신이 있다면 다음 연산을 하지 않는다.(중간에 true가 걸려서 연산이 끝난다)
+
+        (true&&true&&true&&true&&true&&console.log("안녕3"));
+        (true&&true&&true&&false&&true&&console.log("안녕4"));
+        //false 라는 확신이 있다면 다음 연산을 하지 않는다.
+
+
+        
+        //1 | 1 : 1
+        //1 | 0 : 1
+        //0 | 1 : 1
+        //0 | 0 : 0  : 둘다 0이어야 0 (true:1, false:0)
+
+        //1 & 1 : 1
+        //1 & 0 : 0
+        //0 & 1 : 0
+        //0 & 0 : 0  : 하나라도 0이면 0 (true:1, false:0)
+    </script>
+</body>
+</html>

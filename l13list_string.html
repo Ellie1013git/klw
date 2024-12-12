@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>배열과 문자열</title>
+</head>
+<body>
+    <h1>배열과 문자열(string)</h1>
+    <p>배열(타입명:Array) : 순서(index)가 있는 자료를 저장하기 위해 만들어진 자료</p>
+    //"안" "녕" "하" "세" "요" "~"의 배열로 안녕하세요~를 입력
+    <h2>순서가 있는 자료 배열 Array</h2>
+    <ul>
+        <li>Array : 순서대로 데이털르 참조하는 자료형</li>
+        <li>선언법1 : new Array()</li>
+        <li>선언법2 : ["사과","딸기","배",1, true, new Date()...]</li>
+        <li>특정 순서(index)의 자료를 참조하는 법 : arr[0~n]</li>
+        <li>자료의 길이 : arr.length</li>
+        <li>자료를 뒤쪽에 추가 : arr.push(data)</li>
+        <li>특정위치에 자료를 추가하거나 수정하는 것 : arr[0~n]=data</li>
+    </ul>
+    <h2>순서가 있는 자료인데 문자로만 된 기본형 데이터 String</h2>
+    <ul>
+        <li>String : 문자로만 된 순서가 있느 데이터로 js에서만 기본형 데이터로 정의해 사용중</li>
+        <li>선언법1 : let s="안녕"</li>
+        <li>기본형 데이터는 랩퍼 클래스 String : 문자열의 처리를 도와주는 함수를 지원, 존재하지 않는 필드를 참조하도록 도와준다</li>
+        <li>문자열은 자주 사용하기 때문에 js에서는 문자열을 기본형으로 취급한다.</li>
+        <li>Array와 비슷하기 때문에, 유사한 필드나 함수를 지원한다.</li>
+        <li></li>
+    </ul>
+    <script>
+        let arr=['안','녕','하','세','요','~'] //배열을 표기하는 방법
+        let arr2=new Array(); //==[]
+        arr2=[];
+        console.log(arr2.length);
+        console.log(new String("안녕").length);//원래 이렇게 해야하는데, 이 단계를 생략하고 아래처럼 처리하게 도와줌(랩퍼클래스)
+        console.log("안녕".length);
+        
+        
+
+        arr2.push('안');
+        arr2.push('녕');
+        arr2.push('하');
+        arr2.push('세');
+        arr2.push('요');
+        arr2.push('~');
+        console.log(arr,typeof arr);
+        console.log(arr2,typeof arr2);
+        let str = "안녕하세요"; //arr나 arr2처럼 생성하는 것이 귀찮아서 더 쉽게 명시할수있도록 하는 리터럴 표기법 및 데이터 타입
+        console.log(str,typeof str);//string
+        //typeor 는 기본형데이터를 제외하고 모두 object라고 반환한다.
+        //문자열이 기본형데이터라고?
+        //기본형데이터 특징
+        //1. 불변데이터. 처음 정의한 값을 바꾸지 않는다.
+        //2. 표기된 값 그대로다, 데이터가 리터럴하게 표기된 값 뿐이다. 13->0000 1101
+        //3. 동일한 값의 데이터를 선언하면 같은 데이터를 참조하려 한다.(하나만 선언해서 공유함) (보통 이렇게 이러진다. 100%는 아님.) 
+
+        let str2="안녕하세요"; //str을 참조하고 있음
+
+        //문자열이 기본형인지 테스트!!
+        //1. 불변데이터인지 확인 (처음 선언된 이후로 바뀌지 않는다.)
+        //arr=['안','녕','하','세','요','~']
+        console.log(arr[0],arr[1],arr[2]); //안 녕 하   arr[index] 순서는 0부터 시작함
+        //Array는 자료형이기 때문에 필드의 값을 바꿀 수 있다.
+        arr[2]="해"; //배열에서 특정 인덱스의 데이터필드(하위의 값)를 변경
+        console.log(arr); //['안','녕','하','세','요','~']
+
+        console.log(str[0],str[1],str[2]); //문자열도 배열이기 때문에 똑같이 참조가능
+        str[2]="해";
+        console.log(str);//안녀하세요. 시도는 하지만 변경되지 않음
+
+        //2.리터럴하게 표기된 데이터가 값 자체면 비교연산을 할 대상이 존재한다.
+        //문자열은 비교연산을 지원한다.
+        console.log("안녕==안녕","안녕"=="안녕"); //문자열은 "", '' 로 표기할 수 있다.
+        console.log('str==str2',str==str2);
+
+        arr=["a","b"];
+        arr2=["a","b"];
+        console.log("arr==arr2",arr==arr2); //자료형은 비교연산을 할 수 없다.
+        
+        
+
+        //3.데이터가 항상 같은 것을 참조하려고 노력하나
+        //=== : 완전히 같냐
+        console.log("안녕",new String("안녕")); //new string("안녕") : 자료형
+        let primitveStr="안녕"; //리터럴하게 표기(기본형) =>"안녕"이라는 데이터 뿐입니다.
+        //primitveStr : 기본형 문자열
+        let objStr=new String("안녕");//자료형(객체) => "안녕"+문자열 처리함수(필드)를 포함
+        //objStr : 자료형 문자열
+        console.log(objStr.charAt(1));//objStr[1]
+
+        console.log(primitveStr==objStr); //true ==값을 비교 (js가 인위적으로 만드는 true)
+        //기본형 != 자료형
+        //저장된위치도 다름
+        console.log(primitveStr===objStr); //false. 자료형이 같은지, 저장된 위치가 같은지
+        console.log(0==false, 0===false); //true false. Number != Boolean
+        console.log(0==0.0, 0===0.0); // true true. js는 정수와 실수를 구분하지 않는다
+
+        a="안녕";
+        b="안녕";
+        c="안녕";
+        d="안녕";
+
+        console.log(a===b, b===c, c===d, a===d);// true true true true a,b,c,d가 완전히 같은 데이터를 참조한다
+        //확실하게 테스트하는 방법 : 저장된 주소확인
+        
+        
+        
+        
+        //자료형을 생성할 때 규칙 : new 연산자로 생성자(TypeName())을 호출
+        //사람 type =>경민 객체(자료)를 생성
+        //Date => 현재 시간을 갖는 객체를 생성 => new Date()
+        //길이(순서.sequence)가 있는 자료를 생성 => new Array() =>[]
+        //순서 있는 자료인데 문자열인 객체를 생성하고 싶다 => new String()
+        //js 에서 자료형인 문자열이 아니라 기본형 문자열을 제공하고 있는데 기본형을 생성하려면 리터럴하게 표기해야한다.
+        
+        
+        
+//자료형(기본자료형>기본형, 참조자료형>자료형)
+
+    </script>
+</body>
+</html>

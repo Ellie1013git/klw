@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //*전제조건 : a,b,c,d,e는 외부에서 받아온 데이터
+        //a,b,c,d,e 중 1개의 데이터가 있으면 출력
+
+
+        let a;
+        let b;
+        //let c="안녕"
+        let c="";
+        let d;
+        let e;
+
+        //긴 코드
+        if(a){//false인 경우 : "", null, undefined, 0
+        console.log(a);
+        }else if(b){
+            console.log(b);
+        }else if(c){
+            console.log(c);
+        }else if(d){
+            console.log(d);
+        }else {
+            console.log(e);
+        } // 안녕
+
+        //수정코드(논리연산으로 대입해서 출력)
+
+        let say=a||b||c||d||e; // ||연산자 : 하나라도 true가 있으면 모두 true. true가 나오는 즉시 연산 종료
+        console.log(say+"하세요"); // 안녕하세요
+        
+        
+        say=a ?? b ?? c ?? d ?? e;// 널 병합연산자 
+        //하나라도 true면 모두 true => true가 나오면 연산종료
+        console.log(say+"하세요??");
+        
+
+
+
+
+        console.log("------------------------");
+
+        let num1;
+        let num2;
+        let num3;
+        let num4=0;
+        let num5;
+        //5개의 num중에 존재하는 것이 있으면 연산하겠다.
+        let resultNum=10*(num1||num2||num3||num4||num5);
+        //||연산에서 0==false
+
+        //let resultNum=10*(undefined||undefined||undefined||0||undefined); +를 제외한 연산자는 수가 아니라면 수로 형변환함
+        //false와 null은 수인 0으로 형변환, undefined는 형변환이 불가해 NaN.
+
+
+        //let resultNum=10*(Number(num4));
+        console.log(resultNum);//NaN
+        console.log(typeof num1);
+        
+        
+     
+        
+        
+    </script>
+</body>
+</html>

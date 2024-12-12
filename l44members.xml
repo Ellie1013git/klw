@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Members>
+    <Member>
+        <id>like</id>
+        <name>리원</name>
+        <age>10</age>
+    </Member>
+    <Member>
+        <id>cute</id>
+        <name>미란</name>
+        <age>8</age>
+    </Member>
+</Members>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>유용한 연산한 옵셔널 체이닝</title>
+</head>
+<body>
+    <h1>유용한 연산한 옵셔널 체이닝</h1>
+    <h2>자바스크립트와 오류</h2>
+    <ul>
+        <li>자바스크립트는 스레드가 1개인 순차적언어로, 브라우저가 html문서를 노드개체로 만들면서 script 태그를 발견하면 자바스크립트 엔진이 내부 코드를 순서대로 실행한다.</li>
+        <li>만약 순차적으로 실행중 오류가 발생하면 자바스크립트 엔진이 실행을 멈춘다.</li>
+        <li>오류가 발생한 지점의 하위 코드는 실행되지 않는다.(예외처리하면 실행됨)</li>
+    </ul>
+    <h2>. 하위 필드 접근자와 오류</h2>
+    <ul>
+        <li>모든 자료형인 object는 하위필드가 존재하고 '.'으로 필드를 접근할 수 있다.</li>
+        <li>만약 object에 존재하지 않는 필드를 접근하면 undefined를 반환한다.</li>
+        <li>undefined와 null은 필드가 존재하지 않기 때문에 '.'을 사용할 수 없다. 사용하면 오류 발생</li>
+        <li>undefined 참조오류를 막기 위해 예외처리 필요함</li>
+    </ul>
+    <h2>undefined 참조오류를 막기 위한 예외처리</h2>
+    <ul>
+        <li>if(obj.a){c=obj.a.b} : 0 또는 "" 또는 false 를 제외함</li>
+        <li>if(!(obj.a===undefined || null)){c=obj.a.b}  =  if(!obj.a===undefined && !null){c=obj.a.b}</li>
+        <li>c=obj.a && obj.a.b : 0 또는 "" 또는 false 를 제외함</li>
+        <li>c=obj?.a?.b; : ?(옵셔널:null인지 물어보는것) chaining(a,b,c.....)</li>
+        <li></li>
+    </ul>
+    
+    <script>
+        // . : 하위 필드 접근자
+        let a=10;
+        //문제 : a는 필드가 존재하나요?
+        console.log(a.toString()); // 10 //출력되는 이유 => Number, Boolean, String, Symbol 레퍼클래스여서 출력이 되는 것
+          // . : 하위 필드 접근자(필드는 object에만 존재 => 자료형에만 사용 가능)
+
+        console.log(Number(a).toString()); //10
+        console.log(a.length); // undefined => 오류X
+
+        /* console.log(a.str.length); */ // 오류로 인해서 주석 처리
+          // undefined.length: undefined 상태에서 필드를 참조하려하면 오류가 발생
+
+        let obj={name:"나",family:[{name:"너"},{name:"그"}]}
+        console.log(obj.family[1].name); // 그
+        //console.log(obj.family[2].name); // 오류발생 : Uncaught TypeError: Cannot read properties of undefined (reading 'name')
+
+
+
+        // undefined 참조 오류를 사전에 예방 - 오류 있는지 확인하고 오류나면
+        if(obj.family[2]){
+            console.log(obj.family[2].name);
+        }
+          // " ", 0, false 데이터를 제외한다.
+
+        // == 
+        obj.family[2] && console.log(obj.family[2].name);
+          // 앞에(obj.family[2]) 존재할 때 뒤를(console.log(obj.family[2].name)) 실행
+          // && => 모두가 true가 나와야하기 때문에 앞에가 true
+
+        let name=obj.family[0] && obj.family[0].name;
+        console.log(name);
+        
+        //코드가 길고 가독성이 떨어져서 옵셔널 체이닝을 만들었다.
+        console.log(obj?.family[2]?.name); //undefined => 오류 대신 undefined로 출력시킴.
+        //하위필드 접근 전에 null이거나 undefined면 접근하지 않는다.
+        //하위필드가 없으면 undefined
+        
+
+    </script>
+</body>
+</html>

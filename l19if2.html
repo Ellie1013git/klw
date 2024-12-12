@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>삼항연산자</h1>
+    <p>삼항연산자는 if else 구문을 짧게 작성하도록 돕는다.</p>
+    <p>기본작성법 : 조건 ? true 일때 실행코드 : false 일때 실행코드;</p>
+    <p>대입연산자와 쓰기(추천) : let a = 조건 ? true일때 대입 : false 일때 대입;</p>
+    <p></p>
+    <script>
+        //기본 if 구문
+        let age=25;
+        if(age>=20){
+            console.log("(if) 성인"); //(if) 성인
+        }else{
+            console.log("(if) 미성년자");
+        }
+
+        //삼항연산자로 변경
+        age>=20 ? console.log("(삼항) 성인") : console.log("(삼항) 미성년"); //(삼항) 성인
+        
+        // (추천) 대입연산자와 같이 사용
+        let result= age>=20? "성인" : "미성년";
+        console.log(`(대입) 당신은 ${result}입니다`); //(대입) 당신은 성인입니다
+
+
+        // (비추천) 
+        let result2=
+        age<20 ?
+            "(대입2)미성년" : 
+            age<40 ? 
+                "(대입2)청년" : 
+            age<60 ?
+                "(대입2)중년" : 
+            "(대입2)노년" ;
+        console.log(result2); //(대입2)청년
+         
+            
+
+        
+        
+    </script>
+</body>
+</html>

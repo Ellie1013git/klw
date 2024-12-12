@@ -1,0 +1,28 @@
+3.클래스 (Class)
+클래스는 객체를 만드는 틀, 혹은 설계도라고 할 수 있어요. 비슷한 성질을 가진 객체들을 쉽게 만들기 위해서 사용되죠. 예를 들어, 여러 명의 학생 정보를 저장하고 싶을 때, 각 학생마다 이름, 나이, 성적 같은 정보를 가지게 하려면 일일이 객체를 만들어야 하는데, 클래스를 이용하면 훨씬 간단하게 만들 수 있어요.
+
+클래스 예제
+class Student {
+  constructor(name, age, grade) {
+    this.name = name; // 이름 속성
+    this.age = age; // 나이 속성
+    this.grade = grade; // 성적 속성
+  }
+
+  // 메소드: 학생 정보를 출력하는 함수
+  introduce() {
+    console.log(`Hi! My name is ${this.name}. I am ${this.age} years old.`);
+  }
+}
+
+// 새로운 Student 객체 생성
+let student1 = new Student("Alice", 15, "A");
+let student2 = new Student("Bob", 16, "B");
+
+student1.introduce(); // "Hi! My name is Alice. I am 15 years old."
+student2.introduce(); // "Hi! My name is Bob. I am 16 years old."
+
+클래스의 주요 요소
+생성자(constructor): 클래스가 처음 만들어질 때 실행되는 함수로, 객체가 만들어질 때 초기 속성을 설정해줘요. new Student(...)처럼 클래스 이름 뒤에 괄호를 써서 객체를 만들 때 실행됩니다.
+속성(Properties): this.name, this.age, this.grade처럼 클래스 내부에 정의된 데이터예요.
+메소드(Methods): 클래스에 정의된 함수로, 객체가 할 수 있는 행동을 나타내요. 예를 들어, introduce 메소드는 학생의 정보를 출력하는 기능을 해요.

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>forEach</h1>
+    <ul>
+        <li class="item">사과</li>
+        <li class="item">바나나</li>
+        <li class="item">체리</li>
+      </ul>
+
+      <script>
+const items = document.querySelectorAll(".item");
+
+items.forEach((item) => {
+  if (item.innerText === "바나나") {
+    "바나나"==="highlight";
+  }
+});
+      </script>
+</body>
+</html>

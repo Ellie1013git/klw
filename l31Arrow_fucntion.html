@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>타입이 아닌 함수 전용 함수 화살표 함수</title>
+</head>
+<body>
+    <h1>타입이 아닌 함수 전용 함수 화살표 함수</h1>
+    <p>함수형 언어는 함수가 타입이 될 수 있기 때문에 일반함수와 타입을 구분하기 힘들다.
+        (자바스크립트는 함수를 숫자나 문자열처럼 다른 변수에 담을 수도 있고, 다른 함수에 전달할 수도 있어요. 그래서 "함수형 언어"라고 불리기도 해요.)
+
+
+        또한 일반함수를 선언하면 함수에 필요없는 프로토타입(객체)이 생성되어 메모리 낭비가 있다.
+        때문에 프로토타입을 생성하지 않는 일반함수 전용 화살표 함수를 만들어서 사용할 수 있게 해주었다.
+    </p>
+    <!-- script(활자, 문자) == 인터프린터언어(문자를 그대로 해석해서 실행)-->
+     <script>
+        const add=(a,b)=>{return a+b;} //프로토 타입이 없다.
+        const mult=function(a,b){return a*b} //프로토타입을 생성
+        console.log(add(7.77,8.88)); //16.65
+        console.log(mult(7.77,8.88)); //68.9976
+        console.log(add.prototype); //undefined
+        console.log(mult.prototype); //{}
+        //객체지향 프로그래밍을 배운사람은 많은데 함수를 만들때마다 타입을 생성하는 방식이 어려워서 화살표 함수를 만들었다.
+
+        //return이 없는 화살표 함수
+        const add2=(a,b)=>a+b; //=={return a+b;} : 프로그래머가 코드줄이기를 좋아해서서 만들어짐.
+        console.log(add2(4,7)); //11
+
+        const User=(id,name)=>{
+            this.id="aldl1013";
+            this.name="김리원";
+            console.log(this);//User의 객체의 필드가 아니고 브라우저 최상위 객체 window다.
+            //this가 바인딩 되지 않는다. User의 프로토타입이 없으니까 객체가 될 수 없기 때문.
+        };
+    // const user=new User(); //오류. User is not a constructor
+        User();
+
+        
+        
+        
+     </script>
+</body>
+</html>

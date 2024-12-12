@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>노드개체 생성과 일정관리 어플</title>
+    <style>
+        #appUl>li {display: flex; justify-content: space-between;}
+    </style>
+</head>
+<body>
+    <h1>일정 관리 어플</h1>
+    <hr>
+    <ul id="appUl">
+        <li id="appLiEx">
+            <div>
+                <b class="time"></b>
+                <span class="content"></span>
+            </div>
+            <button class="delBtn">일정삭제</button>
+        </li>
+    </ul>
+    <hr>
+    <form name="appForm" action="#">
+        <p>
+            <label>시간
+                <input type="time" name="time">
+            </label>
+            <label>
+                일정
+                <input type="text" name="content" value="양치하기">
+            </label>
+            <button type="submit">등록</button>
+        </p>
+    </form>
+    <script>
+        const appForm=document.forms.appForm;
+        const appUl=document.getElementById("appUl");
+        const time=appForm.time;
+        const content=appForm.content;
+        const schedule={time:content};
+        console.log(schedule);
+        
+
+
+    </script>
+</body>
+</html>

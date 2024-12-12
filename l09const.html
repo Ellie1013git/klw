@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>상수</title>
+</head>
+<body>
+    <h1>const 상수 정의법</h1>
+    <script>
+
+        //var let : 변수. 여러번 다른 데이터를 참조 가능
+        //상수 : 처음 참조한 것을 계속 유지
+        const a=10;
+       // a=20;
+        console.log(a); //a가 변수가 되어야할 것 같아 오류 Uncaught TypeError: Assignment to constant variable.
+       /* const b; 
+        console.log(b); //초기값을 정의해야한다 오류 Uncaught SyntaxError: Missing initializer in const declaration */
+        const b=null;
+        //b=20;
+        console.log(b); //???
+
+        //바뀌지 않는 데이터(불편데이터)
+        //1.수학적 데이터(원주율 등)
+        //2.약속된 데이터(개발자들이 정의하는 데이터)
+        //3.변수의 타입이 불확실해서 const로 참조하는 데이터를 고정(후반에 한번 더)
+        console.log(Math.PI); //원주율
+        console.log(Math.LOG2E); 
+
+        const AIR_MAX_COLOR="#0e89de"; //우리 회사 약속
+        //const AIR_MAX_COLOR="#0e89d0"; //오류떠서 못바꿈
+
+        let m=Math;
+        console.log(m.PI);//3.14...
+        m=10;//m==Math로 약속했는데 누군가 실수로 10으로 바꾼상황
+
+        console.log(m.PI);//10에 PI가 정의되어있지 않음
+        
+        
+
+        
+        
+        
+    </script>
+</body>
+</html>

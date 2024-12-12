@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>수의 연산자</title>
+</head>
+<body>
+    <h1>수를 이용한 연산자들</h1>
+    <p>수는 다양한 연산자를 지원하고 있고 이런 연산자를 이용해서 프로그램을 기획할 수 있다.</p>
+    <hr>
+    <h2>수학 연산</h2>
+    <ul>
+        <li>+19 : 양수(단항연산)</li>
+        <li>-10 : 음수(단항연산)</li>
+        <li>19+11 : 덧셈(이항연산)</li>
+        <li>19-11 : 뺄셈(이항연산)</li>
+        <li>19*11 : 곱셈(이항연산)</li>
+        <li>19/11 : 나눗셈(이항연산)</li>
+        <li>19%4 : 나머지 (3)</li>
+        <li>2**10 : 거듭제곱 (1024)</li>
+    </ul>
+    <h2>대입연산(수학연산) : 나 자신한테 바뀐 값을 대입</h2>
+    <p>이항연산은 모두 가능 +=, -=, *=, /=, **=</p>
+    <h2>증감연산 : 하나 증가시키거나 감소시킨 값을 대입하는 연산</h2>
+    <ul>
+        <li>++a : a를 먼저 1 증가시키고 다음연산을 하라</li>
+        <li>a++ : 다음연산이 있으면 먼저하고 a를 증가시켜라</li>
+        <li>--a : a를 먼저 1 감소시키고 다음연산을 하라</li>
+        <li>a-- : 다음연산이 있으면 먼저하고 a를 감소시켜라</li>
+    </ul>
+
+    <h2>비트연산 : 수가 비트정보로 저장되어 있기 때문에 비트연산이 가능하다.</h2>
+    <ul>
+        <li> &lt;&lt; : 왼쪽시프트</li>
+        <li> &gt;&gt; : right shift</li>
+        <li> ~ : Not(보수)</li>
+        <li> & : And(곱하기) 001101 & 001011 =001001 : 둘다 1일때 1</li>
+        <li> | : Or(더하기)  001101 | 001011 =001111 : 둘중에 한개라도 1일면 1</li>
+        <li> ^ : XOR(배타적 연산) 서로 다른것(0과1)만 1, 같은건(1과1 0과0) 0. (0 ^ 1 = 1)</li>
+    </ul>
+    <script>
+        // console.log(19//4); //파이썬에서 나눠지는 몫==4 //주석이라 계산안됨
+        let a=10;
+        a=a+2; // 12
+        a=a-5;
+        console.log(a);
+        
+        a+=10;  //a=a+10
+        console.log(a);
+        
+        a=2
+        a**=5;
+        console.log(a);
+        
+        a%=6; 
+        console.log(a);
+        
+        let b=0;
+        ++b;
+        console.log(b); //1 
+        console.log(++b); //++b: b를 1 증가시키고 log함수를 실행하라//2
+        console.log(b++); //log 함수를 먼저 실행(출력)하고(그래서 출력하면 2로 나옴) b를 1 증가시켜라
+        console.log(b); //3
+        
+       { let c=(b++)*3; //b*3을 먼저 하고 b를 1증가시켜라
+            console.log(c); //9
+        }
+
+
+        { let c=(++b)*3; //b를 1증가시키고 b*3을 해라
+            console.log(c); //9
+        }
+        
+        console.log("##########");
+        
+        let d=0;//2 전역변수
+        //0000 <<2
+        console.log(d<<2);  0
+        
+        d=1;
+        // 0001 <<2
+        // 0100
+        console.log(d<<2);  4
+
+        d=13;
+        // 1101 >>2
+        // 0011
+        console.log(d>>2); //3
+
+        // 00001101 -> ~
+        // 11110010 ->-13이지만 값은 -14임
+        console.log(~d); //-14
+
+        let e=11; // e=1011
+                  // d=1101
+                  // |=1111 선생님식 더하기
+                  // &=1001 선생님식 곱하기
+        console.log(Number(e).toString(2)); //특정 진수로 출력 1011
+        console.log(e&d); //9??
+        console.log(e|d); //15??
+
+        console.log("e^d=",e^d); //1^0 =>1 나머지는 0 =>0110
+
+        console.log("##########");
+
+        //32 & 19 :
+        console.log(Number(32).toString(2)); //100000
+        console.log(Number(19).toString(2)); //010011
+        // 32&19 = 000000
+        // 32|19 = 110011
+        console.log(32&19);//0
+        console.log(32|19);//51
+
+        //44 24로 해보기 : 
+        console.log(Number(44).toString(2)); //101100
+        console.log(Number(24).toString(2)); //011000
+        // 44&24 = 001000
+        // 44|24 = 111100
+        console.log(parseInt("001000",2)); //8
+        console.log(parseInt("111100",2)); //60
+        console.log(44&24);//8
+        console.log(44|24);//60
+
+        
+        </script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>노드개체 생성과 일정관리 어플</title>
+    <style>
+        #appUl>li {display: flex; justify-content: space-between;}
+    </style>
+</head>
+<body>
+    <h1>일정 관리 어플</h1>
+    <hr>
+    <ul id="appUl">
+        <li id="appLiEx">
+            <div>
+                <b class="time"></b>
+                <span class="content"></span>
+            </div>
+            <button class="delBtn">X</button>
+        </li>
+    </ul>
+    <hr>
+    <form name="appForm" action="#">
+        <p>
+            <label>시간
+                <input type="time" name="time">
+            </label>
+            <label>
+                일정
+                <input type="text" name="content" value="양치하기">
+            </label>
+            <button type="submit">등록</button>
+        </p>
+    </form>
+    <p>
+        <button id="printScheduleBtn">일정 출력</button>
+    </p>
+    <script>
+        const appUl=document.getElementById("appUl");
+        const appLiEx=document.getElementById("appLiEx");
+        const appForm=document.forms.appForm;
+
+        const printScheduleBtn=document.getElementById("printScheduleBtn");
+        const schedule={
+            400:"일어나기",
+            460:"양치하기",
+            560:"수업시작",
+            800:"점심먹기",
+            1100:"퇴근하기",
+            1180:"저녁식사",
+            1320:"잠자기",
+        };
+        const strTime=(key)=>{
+            return `${Math.floor(key/60)}시 ${key%60}분`
+        }
+        const minTime=(time)=>{ //time=>11:25의 형식
+            //split 잘라서 배열로 만드는 매소드
+            let timeArr=time.split(":");//['11', '25']
+            let hour=Number(timeArr[0]);
+            let min=Number(timeArr[1]);
+            return hour*60+min;
+        }
+        const printSchedule=()=>{
+            console.log(appLiEx);
+            appUl.innerHTML="";//removechild
+            for(let key in schedule){
+                let li=appLiEx.cloneNode(true); //true를 쓰면 자식노드를 포함해서 복사
+                li.removeAttribute("id"); // id 지움
+                console.log(li);
+                let timeStr=document.createTextNode(strTime(key));
+                let contents=document.createTextNode(schedule[key]);
+                let b=li.querySelector(".time");
+                let span=li.querySelector(".content");
+                let delBtn=li.querySelector(".delBtn");
+                b.append(timeStr);
+                span.append(contents);
+                appUl.prepend(li);
+                delBtn.onclick=(e)=>{
+                    console.log(li);
+                    delete schedule[key];
+                    printSchedule();                
+                }
+            }
+            
+        };
+        printScheduleBtn.onclick=printSchedule;
+
+        appFormSubmitHandler=(e)=>{
+            e.preventDefault();
+            //e.target==appForm
+            //this==window
+            let time=appForm.time.value;
+            let content=appForm.content.value;
+            if(time in schedule){
+                let result=confirm("등록된 일정을 바꾸시겠습니까?");
+                if(result){
+                    schedule[time]=content;
+                    printSchedule();
+                }
+            }else{
+                schedule[time]=content;
+                printSchedule();
+            }
+            schedule[minTime(time)]=content;
+            printSchedule();
+            
+        }
+        appForm.onsubmit=appFormSubmitHandler;
+
+
+    </script>
+</body>
+</html>
